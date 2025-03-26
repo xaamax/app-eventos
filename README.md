@@ -1,2 +1,2 @@
-# app-cursos
-Gerenciador de Eventos e Cursos.
+# Gerenciamento de Eventos
+Aplicação desenvolvida para Gerenciar Eventos.
