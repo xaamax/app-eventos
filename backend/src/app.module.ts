@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 
 import { UsersModule } from './users/users.module';
 import { CategoriesModule } from './categories/categories.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { CategoriesModule } from './categories/categories.module';
     ApiModule,
     UsersModule,
     CategoriesModule,
+    EventsModule,
   ],
   controllers: [],
   providers: [],

@@ -9,7 +9,7 @@ datasource db {
 
 model User {
   id        Int      @id @default(autoincrement())
-  name      String   @unique
+  name      String
   email  String   @unique
   password  String
   role    Role     @default(USER)
@@ -28,19 +28,19 @@ model Category {
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  event     Event?
+  event     Event[]
 }
 
 model Event {
   id           Int      @id @default(autoincrement())
   locale       String
   dateOfEvent  DateTime
-  theme        String   @unique
-  description  String   @unique
+  theme        String
+  description  String?  
   speaker      String
   amountPeople Int
-  category     Category @relation(fields: [categoryId], references: [id])
-  categoryId   Int      @unique
+  category     Category @relation(fields: [category_id], references: [id])
+  category_id   Int
   isDeleted    Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt

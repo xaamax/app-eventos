@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateCategoryDTO } from '../dtos/create-category.dto';
 import { CategoryDetails } from '../interfaces/category';
-import { buildPrismaSelect } from 'src/common/helpers/prismaSelect.helper';
+import { buildPrismaSelect } from 'src/common/helpers/prisma-select.helper';
 import { CATEGORY_FIELDS } from '../constants';
 import { UpdateCategoryDTO } from '../dtos/update-category.dto';
 import { DeleteCategoryDTO } from '../dtos/delete-category.dto';
@@ -49,9 +49,9 @@ export class CategoriesService {
   }
 
   async deleteCategory(id: number, data: DeleteCategoryDTO) {
-    const user = await this.prisma.category.findUnique({ where: { id } });
+    const category = await this.prisma.category.findUnique({ where: { id } });
 
-    if (!user) throw new NotFoundException('Usuário não encontrado.');
+    if (!category) throw new NotFoundException('Usuário não encontrado.');
 
     return this.prisma.category.update({
       where: { id },
