@@ -5,7 +5,9 @@ import { LoginDTO } from '../dtos/login.dto';
 import { Unprotected } from 'src/common/decorators/unprotected.decorator';
 import { UpdateUserDTO } from '../dtos/update-user.dto';
 import { DeleteUserDTO } from '../dtos/delete-user.dto';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth('Authorization')
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}

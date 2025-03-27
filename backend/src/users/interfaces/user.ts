@@ -1,3 +1,5 @@
+import { Role } from "@prisma/client"
+
 export interface UserSignup {
     id: number
     name: string
@@ -8,7 +10,7 @@ export interface UserDetails {
     id: number
     name: string
     email: string
-    role: string
+    role: Role
     isDeleted: boolean,
     createdAt: Date
 }
