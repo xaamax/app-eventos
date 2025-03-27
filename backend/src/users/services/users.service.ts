@@ -13,14 +13,16 @@ export class UsersService {
   ): Promise<UserSignup> {
     const hash = await this.encryptPassword(payload.password, 10)
     payload.password = hash
-    return this.prisma.user.create({
+    const user = await this.prisma.user.create({
       data: payload,
       select: {
         id: true,
         name: true,
         email: true,
       }
-    })
+    });
+  
+    return user;
   }
 
   async encryptPassword(plainText, saltRound){

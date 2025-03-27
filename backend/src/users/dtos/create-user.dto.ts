@@ -1,5 +1,5 @@
 import { IsEmail, IsEnum, IsNotEmpty } from "class-validator";
-import { UserRole } from "src/common/types/user-roles.enum";
+import { Role } from '@prisma/client';
 
 export class CreateUserDTO {
   @IsNotEmpty({ message: "Nome é obrigatório." })
@@ -12,7 +12,7 @@ export class CreateUserDTO {
   @IsNotEmpty({ message: "Senha é obrigatória." })
   password: string;
 
-  @IsEnum(UserRole, { message: "Papel permitido USER ou ADMIN." })
+  @IsEnum(Role, { message: "Papel permitido USER ou ADMIN." })
   @IsNotEmpty({ message: "Papel é obrigatório." })
-  role: UserRole;
+  role: Role;
 }
