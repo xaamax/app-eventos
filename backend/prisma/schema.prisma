@@ -10,11 +10,16 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   name      String   @unique
-  userName  String   @unique
+  email  String   @unique
   password  String
-  isAdmin Boolean  @default(false)
+  role    Role     @default(USER)
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
 }
 
 model Category {
