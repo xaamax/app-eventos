@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Post, Put, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Put, Request, UseGuards } from '@nestjs/common';
 import { CreateUserDTO } from 'src/users/dtos/create-user.dto';
 import { UsersService } from '../services/users.service';
 import { LoginDTO } from '../dtos/login.dto';
 import { Unprotected } from 'src/common/decorators/unprotected.decorator';
+import { UpdateUserDTO } from '../dtos/update-user.dto';
+import { DeleteUserDTO } from '../dtos/delete-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -10,13 +12,17 @@ export class UsersController {
 
   
   @Post('/register')
-  async register(@Body() createUserDTO: CreateUserDTO) {
+  async register(
+    @Body() 
+    createUserDTO: CreateUserDTO) {
     return await this.userService.register(createUserDTO);
   }
 
   @Unprotected()
   @Post('/login')
-  async login(@Body() loginDTO: LoginDTO) {
+  async login(
+    @Body() 
+    loginDTO: LoginDTO) {
     return await this.userService.login(loginDTO);
   }
 
@@ -28,17 +34,30 @@ export class UsersController {
   }
 
   @Get('/')
-  findAll() {
-    return ':: GET Users ::';
+  async findAll() {
+    return await this.userService.getUsersAll();
   }
 
-  @Get('/users/:id')
-  findById() {
-    return ':: GET Users By Id ::';
+  @Get('/:id/details')
+  async findOne(
+    @Param('id') id: number
+  ) {
+    return await this.userService.getUserById(+id);
   }
 
   @Put('/:id/update')
-  update() {
-    return ':: PUT User ::';
+  async update(
+    @Param('id') id: number,
+    @Body() updateUserDTO: UpdateUserDTO 
+  ) {
+    return await this.userService.updateUser(+id, updateUserDTO);
+  }
+
+  @Patch('/:id/delete')
+  async deleteUser(
+    @Param('id') id: number,
+    @Body() deleteUserDTO: DeleteUserDTO
+  ) {
+    return await this.userService.deleteUser(+id, deleteUserDTO);
   }
 }
